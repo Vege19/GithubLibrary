@@ -37,13 +37,5 @@ data class UserModel(
     val owned_private_repos: Int?,
     val disk_usage: Int?,
     val collaborators: Int?,
-    val two_factor_authentication: Boolean?,
-    val plan: Plan?
-)
-
-data class Plan(
-    val name: String?,
-    val space: Int?,
-    val collaborators: Int?,
-    val private_repos: Int?
+    val two_factor_authentication: Boolean?
 )

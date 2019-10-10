@@ -11,4 +11,6 @@
     <string name="login_use_fingerprint">Usar fingerprint</string>
     <string name="login_empty_error">Este campo no puede estar vacío</string>
 
+    <string name="preference_file_key">PREFERENCES_KEY</string>
+
 </resources>

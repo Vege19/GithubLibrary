@@ -13,7 +13,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import github.vege19.githublibrary.App
 import github.vege19.githublibrary.R
+import github.vege19.githublibrary.utils.Const
 import github.vege19.githublibrary.utils.StartFlow
+import github.vege19.githublibrary.utils.setPreference
 import github.vege19.githublibrary.viewmodels.LoginFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
@@ -76,7 +78,10 @@ class LoginFragment : Fragment(), StartFlow {
     private fun getUserObserver() {
         viewModel.getUserResponse().observe(this, Observer {
             if (it != null) {
-                Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+                //Save user credentials in preferences
+                setPreference().putString(Const.USERNAME_KEY, username).commit()
+                setPreference().putString(Const.PASSWORD_KEY, pass).commit()
                 startRepositoriesFragment()
             }
         })

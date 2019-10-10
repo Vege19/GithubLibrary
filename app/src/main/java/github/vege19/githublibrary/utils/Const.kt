@@ -6,6 +6,10 @@ class Const {
 
         const val BASE_URL = "https://api.github.com/"
 
+        // KEYS //
+        const val USERNAME_KEY = "USERNAME_KEY"
+        const val PASSWORD_KEY = "PASSWORD_KEY"
+
     }
 
 }

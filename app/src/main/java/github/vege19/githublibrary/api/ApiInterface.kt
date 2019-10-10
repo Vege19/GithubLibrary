@@ -1,5 +1,6 @@
 package github.vege19.githublibrary.api
 
+import github.vege19.githublibrary.models.RepositoryModel
 import github.vege19.githublibrary.models.UserModel
 import retrofit2.Call
 import retrofit2.http.GET
@@ -9,5 +10,8 @@ interface ApiInterface {
 
     @GET("user")
     fun getUser(@Header("Authorization") basicAuth: String): Call<UserModel>
+
+    @GET("user/repos")
+    fun getRepos(@Header("Authorization") basicAuth: String): Call<List<RepositoryModel>>
 
 }
