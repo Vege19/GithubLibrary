@@ -9,5 +9,6 @@
     <string name="login_password_hint">Contraseña</string>
     <string name="login_button">INGRESAR</string>
     <string name="login_use_fingerprint">Usar fingerprint</string>
+    <string name="login_empty_error">Este campo no puede estar vacío</string>
 
 </resources>
