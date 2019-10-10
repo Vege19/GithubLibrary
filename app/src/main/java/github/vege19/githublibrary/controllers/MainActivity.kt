@@ -31,21 +31,7 @@ class MainActivity : AppCompatActivity(), StartFlow {
 
     override fun startFlow() {
         App.getComponent().inject(this)
-        getData()
     }
 
-    private fun getData() {
-        viewModel.getData().observe(this, Observer {
-            if (it != null) {
-                for (i in it.results) {
-                    Log.d("Data", i.name)
-                }
-            } else {
-                Log.d("Data", "Empty")
-            }
-        })
-
-        viewModel.generateData()
-    }
 
 }
