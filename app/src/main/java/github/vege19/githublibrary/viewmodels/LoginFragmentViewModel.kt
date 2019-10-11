@@ -14,6 +14,8 @@ import javax.inject.Inject
 
 class LoginFragmentViewModel @Inject constructor(private val apiInterface: ApiInterface): ViewModel() {
 
+    var responseMessage = ""
+
     private val userResponse = MutableLiveData<UserModel>()
     fun getUserResponse(): LiveData<UserModel> = userResponse
     fun getUser(username: String, password: String) {
@@ -24,13 +26,12 @@ class LoginFragmentViewModel @Inject constructor(private val apiInterface: ApiIn
                 if (response.isSuccessful) {
                     userResponse.postValue(response.body())
                 } else {
-                    Log.d("debug", response.message())
                     userResponse.postValue(null)
+                    responseMessage = response.message()
                 }
 
             } catch (t: Throwable) {
                 userResponse.postValue(null)
-                showToast(t.message.toString())
             }
         }
     }

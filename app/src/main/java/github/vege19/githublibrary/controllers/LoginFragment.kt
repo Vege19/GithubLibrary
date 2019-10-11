@@ -1,11 +1,13 @@
 package github.vege19.githublibrary.controllers
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -13,9 +15,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import github.vege19.githublibrary.App
 import github.vege19.githublibrary.R
-import github.vege19.githublibrary.utils.Const
-import github.vege19.githublibrary.utils.StartFlow
-import github.vege19.githublibrary.utils.setPreference
+import github.vege19.githublibrary.utils.*
 import github.vege19.githublibrary.viewmodels.LoginFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
@@ -31,6 +31,7 @@ class LoginFragment : Fragment(), StartFlow {
 
     private lateinit var username: String
     private lateinit var pass: String
+    private lateinit var dialog: AlertDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -46,6 +47,7 @@ class LoginFragment : Fragment(), StartFlow {
 
     override fun startFlow() {
         App.getComponent().inject(this)
+        buildDialog()
         setClickListeners()
         getUserObserver()
     }
@@ -72,7 +74,7 @@ class LoginFragment : Fragment(), StartFlow {
         }
 
         viewModel.getUser(username, pass)
-
+        dialog.show() // Show loading dialog
     }
 
     private fun getUserObserver() {
@@ -82,7 +84,11 @@ class LoginFragment : Fragment(), StartFlow {
                 //Save user credentials in preferences
                 setPreference().putString(Const.USERNAME_KEY, username).commit()
                 setPreference().putString(Const.PASSWORD_KEY, pass).commit()
-                startRepositoriesFragment()
+                startRepositoriesFragment() //Nav to next screen
+                dialog.dismiss() //Close loading dialog
+            } else {
+                showToast(viewModel.responseMessage)
+                dialog.dismiss() //Close loading dialog
             }
         })
     }
@@ -95,5 +101,13 @@ class LoginFragment : Fragment(), StartFlow {
                     true).build())
     }
 
+    private fun buildDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setCancelable(false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.setView(R.layout.dialog_loading)
+        }
+        dialog = builder.create()
+    }
 
 }

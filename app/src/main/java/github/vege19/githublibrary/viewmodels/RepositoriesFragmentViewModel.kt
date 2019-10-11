@@ -13,23 +13,25 @@ import javax.inject.Inject
 
 class RepositoriesFragmentViewModel @Inject constructor(private val apiInterface: ApiInterface): ViewModel() {
 
+    var responseMessage = ""
+
     private val progressLoader = MutableLiveData<Boolean>()
     fun getProgressLoader(): LiveData<Boolean> = progressLoader
 
     private val repositoriesResponse = MutableLiveData<List<RepositoryModel>>()
     fun getRepositoriesResponse(): LiveData<List<RepositoryModel>> = repositoriesResponse
     fun getRepositories(username: String, password: String) {
+        progressLoader.postValue(true)
         GlobalScope.launch {
             try {
                 val response = apiInterface.getRepos(encodeAuth(username, password)).execute()
                 if (response.isSuccessful) {
-                    progressLoader.postValue(false)
                     repositoriesResponse.postValue(response.body())
-                    progressLoader.postValue(true)
+                    progressLoader.postValue(false)
                 } else {
                     repositoriesResponse.postValue(null)
-                    Log.d("debug", response.message())
-                    progressLoader.postValue(true)
+                    responseMessage = response.message()
+                    progressLoader.postValue(false)
                 }
             } catch (t: Throwable) {
 

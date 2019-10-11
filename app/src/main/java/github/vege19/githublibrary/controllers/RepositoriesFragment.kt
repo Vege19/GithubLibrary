@@ -52,17 +52,15 @@ class RepositoriesFragment : Fragment(), StartFlow {
             if (it != null) {
                 repositoriesRv.layoutManager = LinearLayoutManager(context)
                 repositoriesRv.adapter = repositoriesAdapter(it)
+            } else {
+                showToast(viewModel.responseMessage)
             }
         })
     }
 
     private fun progressObserver() {
         viewModel.getProgressLoader().observe(this, Observer {
-            if (!it) {
-                repositoriesProgressBar.visibility = View.VISIBLE
-            } else {
-                repositoriesProgressBar.visibility = View.GONE
-            }
+            repositoriesProgressBar.visibility = if (it == true) View.VISIBLE else View.GONE
         })
     }
 
