@@ -60,16 +60,16 @@ class LoginFragment : Fragment(), StartFlow {
 
     private fun login() {
         //User inputs validations
-        username = inputUsernameEt.text.toString()
-        pass = inputPassEt.text.toString()
+        username = inputUserTxt.text.toString()
+        pass = inputPassTxt.text.toString()
 
         if (username.isEmpty()) {
-            inputUsernameEt.error = getString(R.string.login_empty_error)
+            inputUserLyt.error = getString(R.string.login_empty_error)
             return
         }
 
         if (pass.isEmpty()) {
-            inputPassEt.error = getString(R.string.login_empty_error)
+            inputPassLyt.error = getString(R.string.login_empty_error)
             return
         }
 

@@ -82,4 +82,7 @@ dependencies {
     //Golden finger
     implementation 'co.infinum:goldfinger:2.0.0-RC2'
 
+    //Material components
+    implementation 'com.google.android.material:material:1.0.0'
+
 }
