@@ -4,13 +4,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!--Login Activity-->
+    <!--Login-->
     <string name="login_username_hint">Nombre de usuario</string>
     <string name="login_password_hint">Contraseña</string>
     <string name="login_button">INGRESAR</string>
     <string name="login_use_fingerprint">Usar fingerprint</string>
     <string name="login_empty_error">Este campo no puede estar vacío</string>
     <string name="login_dialog">Iniciando sesión...</string>
+
+    <!--Repositories-->
+    <string name="repos_toolbar_title">Mis repositorios</string>
 
     <string name="preference_file_key">PREFERENCES_KEY</string>
 

@@ -9,6 +9,7 @@ class Const {
         // KEYS //
         const val USERNAME_KEY = "USERNAME_KEY"
         const val PASSWORD_KEY = "PASSWORD_KEY"
+        const val USER_OBJECT_KEY = "USER_OBJECT_KEY"
 
     }
 

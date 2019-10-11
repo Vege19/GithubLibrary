@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import github.vege19.githublibrary.App
 import github.vege19.githublibrary.R
 import github.vege19.githublibrary.models.RepositoryModel
+import github.vege19.githublibrary.models.UserModel
 import github.vege19.githublibrary.utils.*
 import github.vege19.githublibrary.viewmodels.RepositoriesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_repositories.*
@@ -27,6 +28,8 @@ class RepositoriesFragment : Fragment(), StartFlow {
         ViewModelProviders.of(this, viewModelFactory)[RepositoriesFragmentViewModel::class.java]
     }
 
+    private lateinit var user: UserModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_repositories, container, false)
@@ -41,10 +44,16 @@ class RepositoriesFragment : Fragment(), StartFlow {
 
     override fun startFlow() {
         App.getComponent().inject(this)
+        user = arguments?.getSerializable(Const.USER_OBJECT_KEY) as UserModel
+        toolbarConfig()
         repositoriesObserver()
         progressObserver()
         viewModel.getRepositories(getPreference().getString(Const.USERNAME_KEY, "")!!,
             getPreference().getString(Const.PASSWORD_KEY, "")!!)
+    }
+
+    private fun toolbarConfig() {
+        repositoriesTlb.title = getString(R.string.repos_toolbar_title)
     }
 
     private fun repositoriesObserver() {

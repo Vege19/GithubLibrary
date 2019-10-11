@@ -1,5 +1,7 @@
 package github.vege19.githublibrary.models
 
+import java.io.Serializable
+
 data class UserModel(
     val login: String?,
     val id: Int?,
@@ -38,4 +40,4 @@ data class UserModel(
     val disk_usage: Int?,
     val collaborators: Int?,
     val two_factor_authentication: Boolean?
-)
+): Serializable

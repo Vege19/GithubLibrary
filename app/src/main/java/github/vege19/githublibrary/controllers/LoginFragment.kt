@@ -32,6 +32,7 @@ class LoginFragment : Fragment(), StartFlow {
     private lateinit var username: String
     private lateinit var pass: String
     private lateinit var dialog: AlertDialog
+    private val bundle = Bundle()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -84,6 +85,7 @@ class LoginFragment : Fragment(), StartFlow {
                 //Save user credentials in preferences
                 setPreference().putString(Const.USERNAME_KEY, username).commit()
                 setPreference().putString(Const.PASSWORD_KEY, pass).commit()
+                bundle.putSerializable(Const.USER_OBJECT_KEY, it)
                 startRepositoriesFragment() //Nav to next screen
                 dialog.dismiss() //Close loading dialog
             } else {
@@ -95,7 +97,7 @@ class LoginFragment : Fragment(), StartFlow {
 
     private fun startRepositoriesFragment() {
         findNavController().navigate(R.id.action_loginFragment_to_repositoriesFragment,
-            null,
+            bundle,
             NavOptions.Builder()
                 .setPopUpTo(R.id.loginFragment,
                     true).build())
