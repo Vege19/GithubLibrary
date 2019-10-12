@@ -20,11 +20,11 @@ class RepositoriesFragmentViewModel @Inject constructor(private val apiInterface
 
     private val repositoriesResponse = MutableLiveData<List<RepositoryModel>>()
     fun getRepositoriesResponse(): LiveData<List<RepositoryModel>> = repositoriesResponse
-    fun getRepositories(username: String, password: String) {
+    fun getRepositories(base64Auth: String) {
         progressLoader.postValue(true)
         GlobalScope.launch {
             try {
-                val response = apiInterface.getRepos(encodeAuth(username, password)).execute()
+                val response = apiInterface.getRepos(base64Auth).execute()
                 if (response.isSuccessful) {
                     repositoriesResponse.postValue(response.body())
                     progressLoader.postValue(false)

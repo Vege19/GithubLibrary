@@ -48,8 +48,7 @@ class RepositoriesFragment : Fragment(), StartFlow {
         toolbarConfig()
         repositoriesObserver()
         progressObserver()
-        viewModel.getRepositories(getPreference().getString(Const.USERNAME_KEY, "")!!,
-            getPreference().getString(Const.PASSWORD_KEY, "")!!)
+        viewModel.getRepositories(arguments?.getString(Const.BASE64_AUTH_KEY)!!)
     }
 
     private fun toolbarConfig() {

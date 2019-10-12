@@ -43,3 +43,7 @@ fun ImageView.setGlideImage(context: Context, url: String) {
         .centerCrop()
         .into(this)
 }
+
+suspend fun xd() {
+
+}
